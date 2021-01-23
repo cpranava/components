@@ -51,7 +51,7 @@ $(KF_REPO): $(KF_TARBALL_FILE)
 
 %.yaml: $(LIBSONNET)
 	@ mkdir -p $(@D)
-	test ! -f "$*.jsonnet" || $(jsonnet) $*.jsonnet | yq r -P - > $@
+	test ! -f "$*.jsonnet" || $(jsonnet) $*.jsonnet | yq eval -P - > $@
 	@ if ! test -s "$@"; then \
 		echo "jsonnet exited with error"; \
 		rm -f "$@"; \
